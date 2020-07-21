@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans  xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:context="http://www.springframework.org/schema/context"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <!-- создаём объект PoPMusic. пример: ClassMusic classMusicBean = new ClassMusic() -->
+    <bean id="classMusicBean"
+          class="ClassMusic">
+     </bean>
+
+
+    <!-- создаём объект PoPMusic. пример: RockMusic classRockBean = new RockMusic() -->
+    <bean id="classRockBean"
+          class="RockMusic">
+    </bean>
+
+    <!-- создаём объект PoPMusic. пример: PoPMusic classPoPBean = new PoPMusic() -->
+    <bean id="classPoPBean"
+          class="PoPMusic">
+    </bean>
+
+    <!--Ios внедрение зависимости через конструктор -->
+    <bean id = "musicPlayer"
+          class ="MusicPlayer">
+        <constructor-arg  ref = "classRockBean"/>
+
+        <!--Array  -->
+        <property name="musicList">
+            <list>
+                <ref bean="classMusicBean"/>
+                <ref bean="classRockBean"/>
+                <ref bean="classPoPBean"/>
+            </list>
+        </property>
+
+        <!-- пример: MusicPlayer musicPlayer = new MusicPlayer(classMusicBean)-->
+        <!-- Установка значений полю классу MusicPlayer, int volume -->
+        <property name="volume" value="35"/>
+
+
+
+        <!--Ios внедрение зависимости спомощью set Метода -->
+        <!--  <bean id = "musicPlayerID"
+            class ="MusicPlayer">
+          <property name="music" ref="musicBeanID" />  -->
+
+        <!--  пример: MusicPlayer musicPlayerID = new MusicPlayer();
+                       musicPlayerID.setMusic(musicBeanID)-->
+
+
+    </bean>
+
+</beans>
